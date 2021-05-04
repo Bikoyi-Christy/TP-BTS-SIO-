@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+ <TITLE>Controle de formulaire</TITLE>
+ <SCRIPT language="javascript">
+ function majuscule()
+{
+ //alert(window.document.Form1.Champ1.value);
+ window.document.Form1.Champ1.value=window.document.Form1.Champ1.value.toUpperCase();
+} 
+
+function majPrenom()
+{
+ //alert(window.document.Form1.Champ2.value);
+ ch1 = window.document.Form1.Champ2.value.charAt(0).toUpperCase();
+ ch2 = window.document.Form1.Champ2.value.substr(1,100);
+ window.document.Form1.Champ2.value = ch1+ch2;
+} 
+function calculAge() 
+    {
+    today = new Date();
+    var anneeCourante = today.getFullYear();
+    var moiscourant = today.getMonth()
+
+    /*alert(anneeCourante);*/
+
+    C3 = window.document.Form1.Champ3.value;
+    TC3 = C3.split("/");
+
+    J = TC3[0];
+    M = TC3[1];
+    A = TC3[2];
+
+
+        if ( (J.length != 2) || (M.length != 2) || (A.length != 4) ) 
+        {
+            alert("Format de date : jj/mm/aaaa");
+        }
+        else 
+        {
+            if(moiscourant - M < 0)
+                    {
+                        Age = anneeCourante - A-1 
+                    }
+            else
+                    {
+                        Age = anneeCourante - A
+                    }
+                    
+            window.document.Form1.Champ4.value = Age;
+        }
+    }
+function OuvrirFenetre1() {
+ var hauteur=100; // hauteur de la fenêtre à créer
+ var largeur=200;
+ options="width="+largeur+",height="+hauteur+"toolbar=yes,directories=no,menubar=no,scrollbars=yes,status=yes";
+ fen1 =open("info.html","Nouvelle_fenetre",options);
+ //fen1.document.write("Bonjour le monde !<BR>");
+}
+
+function CtrlChamps1()
+{
+ if (window.document.Form1.Champ1.value == "")
+ {
+ alert("Veuillez remplir les champs suivants");
+ window.document.Form1.Champ1.focus();
+ return false;
+ }
+ else
+ {
+ window.document.Form1.submit(); // force le submit meme si le bouton n'est pas de type submit 
+ return true;
+ } 
+}
+function numero(){
+	//x= window.document.Form1.Champ5.value.length;
+	//alert(x);
+	if (window.document.Form1.Champ5.value.length !=10)
+	{
+	alert("Veuillez entrer un numéro a 10 chiffres");
+		window.document.Form1.Champ5.focus();
+	}
+	
+	else { 
+		//(window.document.Form1.Champ5.value.length ==10)
+	
+		alert ("Ok");
+		window.document.Form1.Champ5.focus();
+	}
+	
+}
+</SCRIPT> 
+
+</HEAD>
+
+<BODY bgcolor="#FFFFCC">
+<FORM action="recup_champ.php" name="Form1">
+<TABLE border="1">
+ <TR>
+ <TD>Nom</TD>
+ <TD><INPUT type="text" value="" name="Champ1" onChange="majuscule()"></TD>
+ </TR>
+ <TR>
+ <TD>Prénom</TD>
+ <TD><INPUT type="text" value="" name="Champ2" onChange="majPrenom()"></TD>
+ </TR>
+ <TR>
+ <TD>Né(e) le</TD>
+ <TD><INPUT type="text" value="" name="Champ3" onChange="calculAge()"></TD>
+ </TR>
+ <TR>
+ <TD>Age</TD>
+ <TD><INPUT type="text" value="" name="Champ4" onChange="" ></TD>
+ </TR>
+ <TD>Numéro de téléphone</TD>
+ <TD><INPUT type="text" value="" name="Champ5" onChange="numero()" required minlength="10" maxlength="10" size="10"></TD>
+ <TR>
+ <TD COLSPAN=2 align="center">
+ <INPUT type="button" value=" Ok " onClick="return CtrlChamps1();">
+ <INPUT type="button" value="Aide" onClick="OuvrirFenetre1();">
+ </TD>
+ </TR>
+</TABLE>
+</FORM>
+</BODY>
+</HTML>
